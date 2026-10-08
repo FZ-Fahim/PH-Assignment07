@@ -3,6 +3,8 @@ import Banner from "@/components/homepage/Banner";
 import ProductGrid from "@/components/products/ProductGrid";
 import { getProducts } from "@/lib/api/products";
 import type { Product } from "@/types/product";
+import TopRisers from "@/components/homepage/TopRisers";
+import TopFallers from "@/components/homepage/TopFallers";
 
 export default async function Home() {
   let products: Product[] = [];
@@ -19,6 +21,12 @@ export default async function Home() {
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
       {/* Hero Banner */}
       <Banner />
+
+      {/* Top Risers Section */}
+      <TopRisers products={products} />
+
+      {/* Top Fallers Section */}
+      <TopFallers products={products} />
 
       {/* All Products Section */}
       <section id="সব-পণ্য" className="mt-14 scroll-mt-6">

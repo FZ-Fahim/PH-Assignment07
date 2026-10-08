@@ -9,9 +9,13 @@ import {
 
 interface ProductCardProps {
   product: Product;
+  variant?: "default" | "compact";
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({
+  product,
+  variant = "default",
+}: ProductCardProps) {
   const { dir } = product.change;
 
   const changeStyles = {
@@ -26,6 +30,51 @@ export default function ProductCard({ product }: ProductCardProps) {
     flat: "—",
   };
 
+  // Compact card for Top Risers and Top Fallers
+  if (variant === "compact") {
+    return (
+      <Link
+        href={`/product/${product.slug}`}
+        className="group flex h-full min-w-0 flex-col justify-between rounded-xl border border-border bg-white p-3 transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-4"
+      >
+        {/* Product name and emoji */}
+        <div className="flex min-w-0 items-center gap-2.5">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-background text-xl">
+            {product.image}
+          </div>
+
+          <div className="min-w-0">
+            <h3 className="truncate text-sm font-semibold text-foreground">
+              {product.nameBn}
+            </h3>
+            <p className="mt-0.5 text-xs text-muted">
+              প্রতি {formatUnit(product.unit)}
+            </p>
+          </div>
+        </div>
+
+        {/* Price and percentage */}
+        <div className="mt-4">
+          <p className="text-[11px] text-muted">আজকের দাম</p>
+
+          <div className="mt-1 flex items-end justify-between gap-2">
+            <span className="text-base font-bold text-foreground">
+              {formatPrice(product.today)}
+            </span>
+
+            <span
+              className={`shrink-0 rounded-md px-2 py-1 text-[11px] font-semibold ${changeStyles[dir]}`}
+            >
+              {changeArrow[dir]}{" "}
+              {formatPercentage(product.change.pct)}
+            </span>
+          </div>
+        </div>
+      </Link>
+    );
+  }
+
+  // Default card for All Products and Category pages
   return (
     <Link
       href={`/product/${product.slug}`}
@@ -56,9 +105,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* Price information */}
       <div className="mt-auto pt-4">
         <div className="border-t border-border pt-3">
-          <p className="text-xs text-muted">
-            আজকের দাম
-          </p>
+          <p className="text-xs text-muted">আজকের দাম</p>
 
           <div className="mt-1 flex flex-wrap items-center justify-between gap-2">
             <p className="text-xl font-bold text-foreground">
