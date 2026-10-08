@@ -1,26 +1,33 @@
 
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import heroImage from "@/assets/bazar-hero.png";
 
 export default function Banner() {
-  const banglaDate = new Intl.DateTimeFormat("bn-BD", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "Asia/Dhaka",
-  }).format(new Date());
+  const [banglaDate, setBanglaDate] = useState("");
+
+  useEffect(() => {
+    const formattedDate = new Intl.DateTimeFormat("bn-BD", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      timeZone: "Asia/Dhaka",
+    }).format(new Date());
+
+    setBanglaDate(formattedDate);
+  }, []);
 
   return (
     <section className="w-full overflow-hidden rounded-[20px] border border-[#e0e9e1] bg-[#fafcfb]">
       <div className="flex flex-col items-center justify-between gap-6 px-4 py-5 sm:px-6 md:min-h-[210px] md:flex-row md:gap-8 md:px-8 md:py-5">
-        
         {/* Left Content */}
         <div className="w-full flex-1 text-left">
-          
           {/* Eyebrow */}
           <span className="inline-flex items-center rounded-full bg-[#e4f5e9] px-3 py-1 text-xs font-medium text-[#008e46]">
-            {banglaDate}
+            {banglaDate || "\u00A0"}
           </span>
 
           {/* Heading */}

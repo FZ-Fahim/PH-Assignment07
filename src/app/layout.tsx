@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="bn">
       <head>
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="/icon.png" />
       </head>
       <body className={`${geist.variable} ${hindSiliguri.variable} antialiased`}>
         <Navbar />

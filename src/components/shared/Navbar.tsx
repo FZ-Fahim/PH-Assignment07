@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,6 +9,7 @@ import logoIcon from "@/assets/logo-icon.png";
 import CategoryNav from "./CategoryNav";
 import PriceTicker from "./PriceTicker";
 import AuthButtons from "./AuthButtons";
+
 
 export default function Navbar() {
   const [banglaDate, setBanglaDate] = useState("");
@@ -58,7 +59,10 @@ export default function Navbar() {
         <AuthButtons />
       </div>
 
-      <CategoryNav />
+      <Suspense fallback={null}>
+        <CategoryNav />
+      </Suspense>
+      
       <PriceTicker />
     </header>
   );
