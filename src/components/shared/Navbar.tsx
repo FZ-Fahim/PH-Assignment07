@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from "next/image";
@@ -17,47 +16,52 @@ export default function Navbar() {
 
   return (
     <header className="w-full border-b border-border bg-white">
-      <div className="mx-auto flex min-h-20 max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
-        {/* Logo and Date */}
-        <Link href="/" className="flex items-center gap-3">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary">
-          <Image
-            src={logoIcon}
-            alt="বাজার দর লোগো"
-            width={40}
-            height={40}
-            className="h-9 w-9 object-contain"
-            priority
-          />
-        </div>
+      <div className="mx-auto flex min-h-16 max-w-6xl items-center justify-between gap-2 px-3 py-3 sm:min-h-20 sm:px-6">
+        {/* Logo */}
+        <Link
+          href="/"
+          className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3"
+        >
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-primary sm:h-12 sm:w-12">
+            <Image
+              src={logoIcon}
+              alt="বাজার দর লোগো"
+              width={36}
+              height={36}
+              className="h-8 w-8 object-contain sm:h-10 sm:w-10"
+              priority
+            />
+          </div>
 
-          <div>
-            <h1 className="text-xl font-bold leading-tight text-primary sm:text-2xl">
+          <div className="min-w-0">
+            <p className="text-lg leading-tight font-bold text-foreground sm:text-2xl">
               বাজার দর
-            </h1>
-            <p className="mt-1 text-[11px] text-muted sm:text-xs">
+            </p>
+            <p className="mt-0.5 text-[10px] text-muted sm:text-xs">
               {banglaDate}
             </p>
           </div>
         </Link>
 
         {/* Authentication Buttons */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-3">
           <Link
             href="/signin"
-            className="rounded-lg border border-primary px-3 py-2 text-xs font-semibold text-primary transition-colors hover:bg-primary-light sm:px-5 sm:text-sm"
+            className="rounded-md px-2.5 py-2 text-xs font-medium text-foreground transition-colors hover:bg-primary-light hover:text-primary sm:px-4 sm:text-sm"
           >
             সাইন ইন
           </Link>
 
           <Link
             href="/signup"
-            className="rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-primary-hover sm:px-5 sm:text-sm"
+            className="rounded-md bg-primary px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-primary-hover sm:px-5 sm:py-2.5 sm:text-sm"
           >
             সাইন আপ
           </Link>
         </div>
       </div>
+
+      
       <CategoryNav />
       <PriceTicker />
     </header>

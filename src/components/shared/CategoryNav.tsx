@@ -43,7 +43,7 @@ export default function CategoryNav() {
   return (
     <nav className="w-full border-t border-border bg-white">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="flex items-center gap-2 overflow-x-auto py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex items-center gap-1.5 overflow-x-auto overscroll-x-contain py-2 sm:gap-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             
             <Link
               href="/"

@@ -51,13 +51,13 @@ export default function PriceTicker() {
   if (products.length === 0) return null;
 
   return (
-    <div className="w-full overflow-hidden border-t border-green-100 bg-[#eaf5ed] py-3">
+    <div className="w-full overflow-hidden border-t border-border bg-white py-2 sm:py-2.5">
       <div className="ticker-track flex w-max items-center">
         {/* Duplicate products for seamless scrolling */}
         {[0, 1].map((copy) => (
           <div
             key={copy}
-            className="flex shrink-0 items-center gap-8 pr-8"
+            className="flex shrink-0 items-center gap-1.5 whitespace-nowrap text-xs sm:gap-2 sm:text-sm"
             aria-hidden={copy === 1}
           >
             {products.map((product) => {
@@ -78,7 +78,7 @@ export default function PriceTicker() {
                   key={product.id}
                   className="flex shrink-0 items-center gap-2 whitespace-nowrap text-sm"
                 >
-                  <span className="text-lg">{product.image}</span>
+                  <span className="text-sm sm:text-base">{product.image}</span>
 
                   <span className="font-medium text-foreground">
                     {product.nameBn}
