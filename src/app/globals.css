@@ -4,18 +4,6 @@
 :root {
   --background: #f0f5f1;
   --foreground: #1f2923;
-
-  --color-primary: #008e46;
-  --color-primary-hover: #00773b;
-  --color-primary-light: #e6f5eb;
-
-  --color-surface: #ffffff;
-  --color-border: #e2e8e3;
-  --color-muted: #647067;
-
-  --color-price-up: #dc4545;
-  --color-price-down: #15945c;
-  --color-price-flat: #808b84;
 }
 
 @theme inline {
@@ -35,7 +23,6 @@
   --color-price-flat: #808b84;
 
   --font-sans: var(--font-hind-siliguri), sans-serif;
-  --font-english: var(--font-geist), sans-serif;
 }
 
 html {
@@ -49,22 +36,32 @@ body {
   min-height: 100vh;
 }
 
-button,
-input,
-select,
-textarea {
-  font: inherit;
+/* Price ticker animation */
+
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
-button {
-  cursor: pointer;
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 60s linear infinite;
+  will-change: transform;
 }
 
-button:disabled {
-  cursor: not-allowed;
+.ticker-track:hover {
+  animation-play-state: paused;
 }
 
-::selection {
-  background: #b8e8c8;
-  color: #14532d;
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
 }
+

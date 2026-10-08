@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import ToastProvider from "@/components/ui/ToastProvider";
+import Navbar from "@/components/shared/Navbar";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function RootLayout({
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       </head>
       <body className={`${geist.variable} ${hindSiliguri.variable} antialiased`}>
+        <Navbar />
         {children}
         <ToastProvider />
       </body>
