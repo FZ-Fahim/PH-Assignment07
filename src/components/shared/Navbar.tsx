@@ -5,6 +5,7 @@ import Link from "next/link";
 import logoIcon from "@/assets/logo-icon.png";
 import CategoryNav from "./CategoryNav";
 import PriceTicker from "./PriceTicker";
+import AuthButtons from "./AuthButtons";
 
 export default function Navbar() {
   const banglaDate = new Intl.DateTimeFormat("bn-BD", {
@@ -43,22 +44,8 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Authentication Buttons */}
-        <div className="flex shrink-0 items-center gap-1.5 sm:gap-3">
-          <Link
-            href="/signin"
-            className="rounded-md px-2.5 py-2 text-xs font-medium text-foreground transition-colors hover:bg-primary-light hover:text-primary sm:px-4 sm:text-sm"
-          >
-            সাইন ইন
-          </Link>
-
-          <Link
-            href="/signup"
-            className="rounded-md bg-primary px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-primary-hover sm:px-5 sm:py-2.5 sm:text-sm"
-          >
-            সাইন আপ
-          </Link>
-        </div>
+        {/* Authentication */}
+        <AuthButtons />
       </div>
 
       

@@ -26,6 +26,8 @@ async function createAuth() {
     emailAndPassword: {
       enabled: true,
       requireEmailVerification: false,
+      autoSignIn: false,
+      minPasswordLength: 8,
     },
 
     socialProviders: {
