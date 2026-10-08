@@ -1,4 +1,5 @@
 
+import Banner from "@/components/homepage/Banner";
 import ProductGrid from "@/components/products/ProductGrid";
 import { getProducts } from "@/lib/api/products";
 import type { Product } from "@/types/product";
@@ -15,18 +16,24 @@ export default async function Home() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <section id="সব-পণ্য">
+    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
+      {/* Hero Banner */}
+      <Banner />
+
+      {/* All Products Section */}
+      <section id="সব-পণ্য" className="mt-14 scroll-mt-6">
+        {/* Section Heading */}
         <div className="mb-7">
-          <h1 className="text-2xl font-bold text-foreground sm:text-3xl">
+          <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
             সব পণ্য
-          </h1>
+          </h2>
 
           <p className="mt-2 text-sm text-muted sm:text-base">
             নিত্যপ্রয়োজনীয় সকল পণ্যের আজকের বাজারদর এক নজরে দেখুন।
           </p>
         </div>
 
+        {/* Product Content */}
         {hasError ? (
           <div className="rounded-xl border border-red-200 bg-red-50 p-8 text-center">
             <p className="text-price-up">
