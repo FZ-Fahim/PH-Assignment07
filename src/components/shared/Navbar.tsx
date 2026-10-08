@@ -1,19 +1,28 @@
+
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
 import logoIcon from "@/assets/logo-icon.png";
 import CategoryNav from "./CategoryNav";
 import PriceTicker from "./PriceTicker";
 import AuthButtons from "./AuthButtons";
 
 export default function Navbar() {
-  const banglaDate = new Intl.DateTimeFormat("bn-BD", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "Asia/Dhaka",
-  }).format(new Date());
+  const [banglaDate, setBanglaDate] = useState("");
+
+  useEffect(() => {
+    const formattedDate = new Intl.DateTimeFormat("bn-BD", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      timeZone: "Asia/Dhaka",
+    }).format(new Date());
+
+    setBanglaDate(formattedDate);
+  }, []);
 
   return (
     <header className="w-full border-b border-border bg-white">
@@ -38,8 +47,9 @@ export default function Navbar() {
             <p className="text-lg leading-tight font-bold text-foreground sm:text-2xl">
               বাজার দর
             </p>
+
             <p className="mt-0.5 text-[10px] text-muted sm:text-xs">
-              {banglaDate}
+              {banglaDate || "\u00A0"}
             </p>
           </div>
         </Link>
@@ -48,7 +58,6 @@ export default function Navbar() {
         <AuthButtons />
       </div>
 
-      
       <CategoryNav />
       <PriceTicker />
     </header>
