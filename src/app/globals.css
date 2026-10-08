@@ -1,26 +1,70 @@
+
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f0f5f1;
+  --foreground: #1f2923;
+
+  --color-primary: #008e46;
+  --color-primary-hover: #00773b;
+  --color-primary-light: #e6f5eb;
+
+  --color-surface: #ffffff;
+  --color-border: #e2e8e3;
+  --color-muted: #647067;
+
+  --color-price-up: #dc4545;
+  --color-price-down: #15945c;
+  --color-price-flat: #808b84;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-primary: #008e46;
+  --color-primary-hover: #00773b;
+  --color-primary-light: #e6f5eb;
+
+  --color-surface: #ffffff;
+  --color-border: #e2e8e3;
+  --color-muted: #647067;
+
+  --color-price-up: #dc4545;
+  --color-price-down: #15945c;
+  --color-price-flat: #808b84;
+
+  --font-sans: var(--font-hind-siliguri), sans-serif;
+  --font-english: var(--font-geist), sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-hind-siliguri), sans-serif;
+  min-height: 100vh;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+::selection {
+  background: #b8e8c8;
+  color: #14532d;
 }
