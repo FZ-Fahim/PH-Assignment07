@@ -3,6 +3,7 @@ import { Geist, Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import ToastProvider from "@/components/ui/ToastProvider";
 import Navbar from "@/components/shared/Navbar";
+import Footer from "@/components/shared/Footer";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -35,6 +36,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <ToastProvider />
+        <Footer />
       </body>
     </html>
   );
