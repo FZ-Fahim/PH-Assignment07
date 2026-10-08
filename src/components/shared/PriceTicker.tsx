@@ -2,7 +2,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { API_BASE_URL, API_ENDPOINTS } from "@/lib/api/config";
+import {
+  API_BASE_URL,
+  API_FALLBACK_URL,
+  API_ENDPOINTS,
+} from "@/lib/api/config";
 
 type Product = {
   id: number;
@@ -30,22 +34,51 @@ export default function PriceTicker() {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
+    let cancelled = false;
+
     async function getProducts() {
-      try {
-        const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.products}`);
+      const urls = [
+        `${API_BASE_URL}${API_ENDPOINTS.products}`,
+        `${API_FALLBACK_URL}${API_ENDPOINTS.products}`,
+      ];
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch products");
+      for (const url of urls) {
+        try {
+          const response = await fetch(url, {
+            cache: "no-store",
+          });
+
+          if (!response.ok) {
+            continue;
+          }
+
+          const data: unknown = await response.json();
+
+          if (!Array.isArray(data)) {
+            continue;
+          }
+
+          if (!cancelled) {
+            setProducts(data as Product[]);
+          }
+
+          return;
+        } catch {
+          // Try the fallback API.
         }
+      }
 
-        const data: Product[] = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error("Price ticker fetch error:", error);
+      // If both APIs fail, keep the ticker hidden.
+      if (!cancelled) {
+        setProducts([]);
       }
     }
 
     getProducts();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   if (products.length === 0) return null;
@@ -71,14 +104,20 @@ export default function PriceTicker() {
                     : "text-price-flat";
 
               const arrow =
-                dir === "up" ? "▲" : dir === "down" ? "▼" : "—";
+                dir === "up"
+                  ? "▲"
+                  : dir === "down"
+                    ? "▼"
+                    : "—";
 
               return (
                 <div
                   key={product.id}
                   className="flex shrink-0 items-center gap-2 whitespace-nowrap text-sm"
                 >
-                  <span className="text-sm sm:text-base">{product.image}</span>
+                  <span className="text-sm sm:text-base">
+                    {product.image}
+                  </span>
 
                   <span className="font-medium text-foreground">
                     {product.nameBn}
@@ -89,7 +128,9 @@ export default function PriceTicker() {
                     {unitLabels[product.unit] ?? product.unit}
                   </span>
 
-                  <span className={`font-semibold ${changeColor}`}>
+                  <span
+                    className={`font-semibold ${changeColor}`}
+                  >
                     {arrow} {banglaNumber(Math.abs(pct))}%
                   </span>
                 </div>
