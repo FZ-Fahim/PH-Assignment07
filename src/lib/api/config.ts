@@ -3,7 +3,7 @@ export const API_BASE_URL =
   "https://api.abcz.workers.dev/api/bazardor";
 
 export const API_FALLBACK_URL =
-  "https://api.api-store.workers.dev/api/bazardor";
+  " https://openapi.programming-hero.com/api/bazardor";
 
 export const API_ENDPOINTS = {
   products: "/products",
